@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOCKROCK — No Slip. No Wobble. No Waiting.</title>
+<meta name="description" content="LockRock hook-and-loop barbell collars: one-hand wrap, zero-slip grip, off in under a second.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --noir-950:#0A0A0B;
+    --noir-900:#131315;
+    --noir-800:#1C1C1F;
+    --noir-700:#28282C;
+    --noir-600:#3A3A40;
+    --fog-500:#8A8B90;
+    --fog-300:#B9BABE;
+    --fog-100:#E4E4E6;
+    --paper:#EFEDE8;
+    --paper-dim:#E2DFD8;
+    --ink:#121214;
+    --red-700:#A8141A;
+    --red-600:#D31921;
+    --red-500:#E63A2E;
+    --red-900:#3D0A0C;
+
+    --font-display:'Anton', sans-serif;
+    --font-body:'Manrope', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+
+    --container:1220px;
+    --edge: clamp(20px, 5vw, 64px);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--noir-950);
+    color:var(--fog-100);
+    font-family:var(--font-body);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ margin:0; padding:0; list-style:none; }
+  h1,h2,h3,p{ margin:0; }
+  button{ font-family:inherit; cursor:pointer; }
+
+  *:focus-visible{ outline:2px solid var(--red-500); outline-offset:3px; }
+
+  .wrap{ max-width:var(--container); margin:0 auto; padding-left:var(--edge); padding-right:var(--edge); }
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    color:var(--red-500);
+  }
+  .eyebrow::before{ content:""; width:7px; height:7px; background:var(--red-600); display:inline-block; flex:none; border-radius:1px; }
+
+  .h-display{
+    font-family:var(--font-display);
+    text-transform:uppercase;
+    font-weight:400;
+    letter-spacing:0.005em;
+    line-height:0.96;
+  }
+  .h-display .accent{ color:var(--red-500); }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:100;
+    background:rgba(10,10,11,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+    transition:box-shadow .3s ease, background .3s ease;
+  }
+  header.nav.scrolled{ box-shadow:0 10px 30px rgba(0,0,0,0.45); background:rgba(10,10,11,0.97); }
+  .nav__inner{ display:flex; align-items:center; justify-content:space-between; padding-top:14px; padding-bottom:14px; }
+  .nav__logo img{ height:26px; width:auto; border-radius:3px; display:block; }
+  .nav__links{ display:flex; align-items:center; gap:34px; }
+  .nav__links a{ color:var(--fog-300); font-size:0.8rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; transition:color .2s ease; }
+  .nav__links a:hover{ color:var(--red-500); }
+  .nav__right{ display:flex; align-items:center; gap:20px; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; border-radius:4px;
+    font-weight:700; font-size:0.8rem; letter-spacing:0.05em; text-transform:uppercase;
+    padding:13px 26px; border:1px solid transparent;
+    transition:transform .18s ease, box-shadow .18s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn--red{ background:var(--red-600); color:#fff; }
+  .btn--red:hover{ background:var(--red-500); box-shadow:0 10px 26px rgba(211,25,33,0.35); }
+  .btn--ghost-dark{ background:transparent; color:var(--fog-100); border-color:rgba(255,255,255,0.25); }
+  .btn--ghost-dark:hover{ border-color:var(--red-500); color:var(--red-500); }
+  .btn--ink{ background:var(--ink); color:var(--paper); }
+  .btn--ink:hover{ box-shadow:0 10px 26px rgba(0,0,0,0.35); }
+  .btn--white{ background:#fff; color:var(--red-700); }
+  .btn--white:hover{ box-shadow:0 10px 26px rgba(0,0,0,0.3); }
+  .btn--small{ padding:10px 18px; font-size:0.72rem; }
+
+  .hamburger{ display:none; flex-direction:column; gap:5px; background:none; border:none; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:var(--fog-100); display:block; }
+  .mobile-menu{ display:none; flex-direction:column; background:var(--noir-900); border-top:1px solid rgba(255,255,255,0.06); }
+  .mobile-menu a{ padding:16px var(--edge); color:var(--fog-300); font-size:0.85rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; border-bottom:1px solid rgba(255,255,255,0.05); }
+  .mobile-menu.open{ display:flex; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:94vh;
+    display:flex;
+    align-items:flex-end;
+    background-image:
+      linear-gradient(180deg, rgba(10,10,11,0.32) 0%, rgba(10,10,11,0.48) 45%, rgba(10,10,11,0.97) 92%),
+      url('assets/hero-background.jpg');
+    background-size:cover;
+    background-position:center 20%;
+    background-attachment:fixed;
+  }
+  @media (max-width:980px){ .hero{ background-attachment:scroll; min-height:86vh; background-position:center 15%; } }
+  .hero__inner{ padding-top:80px; padding-bottom:clamp(48px,7vw,84px); width:100%; }
+  .hero__title{ font-size:clamp(3rem, 8.4vw, 6.6rem); max-width:14ch; }
+  .hero__sub{ margin-top:22px; max-width:46ch; font-size:clamp(1rem,1.6vw,1.15rem); line-height:1.65; color:var(--fog-300); }
+  .hero__ctas{ margin-top:32px; display:flex; flex-wrap:wrap; gap:16px; }
+  .hero__specs{ margin-top:40px; display:flex; gap:30px; flex-wrap:wrap; font-family:var(--font-mono); }
+  .hero__specs div{ font-size:0.7rem; color:var(--fog-500); text-transform:uppercase; letter-spacing:0.1em; }
+  .hero__specs strong{ display:block; color:var(--fog-100); font-size:1.15rem; font-family:var(--font-body); font-weight:700; letter-spacing:0; text-transform:none; margin-top:4px; }
+
+  /* ---------- TRUST BAR ---------- */
+  .trust-bar{ background:var(--noir-900); border-top:1px solid rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.06); }
+  .trust-bar__inner{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:18px; padding-top:20px; padding-bottom:20px; }
+  .trust-item{ display:flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--fog-300); }
+  .trust-item .stars{ color:var(--red-500); letter-spacing:0.05em; font-size:0.85rem; }
+
+  section{ padding-top:clamp(60px,9vw,110px); padding-bottom:clamp(60px,9vw,110px); }
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-bottom:clamp(34px,5vw,58px); }
+  .section-head h2{ font-size:clamp(2.1rem, 4.8vw, 3.5rem); }
+  .section-head p{ max-width:38ch; color:var(--fog-500); line-height:1.6; }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- COMPARE (real photo panels) ---------- */
+  .compare{ background:var(--noir-950); }
+  .compare__grid{ display:grid; grid-template-columns:1fr 1fr; gap:2px; border-radius:14px; overflow:hidden; }
+  .compare__panel{
+    position:relative;
+    min-height:460px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:clamp(26px,3.5vw,40px);
+    background-size:cover;
+    background-position:center;
+  }
+  .compare__panel--old{ background-image: linear-gradient(180deg, rgba(10,10,11,0.15) 10%, rgba(10,10,11,0.94) 88%), url('assets/struggle-old.jpg'); }
+  .compare__panel--new{ background-image: linear-gradient(180deg, rgba(10,10,11,0.1) 10%, rgba(20,4,5,0.92) 88%), url('assets/product-lockdown.jpg'); }
+  .compare__panel h3{ font-family:var(--font-display); text-transform:uppercase; font-weight:400; font-size:1.8rem; margin-bottom:18px; }
+  .compare__panel--old h3{ color:#E63A2E; }
+  .compare__panel--new h3{ color:#35C759; }
+  .compare__panel li{ display:flex; gap:10px; align-items:flex-start; padding:9px 0; border-top:1px solid rgba(255,255,255,0.1); font-size:0.92rem; line-height:1.5; color:var(--fog-100); }
+  .compare__panel li:first-of-type{ border-top:none; }
+  .compare__panel--old li{ color:#E63A2E; } .compare__panel--old li::before{ content:"✕"; color:#E63A2E; font-weight:700; flex:none; }
+  .compare__panel--new li{ color:#35C759; } .compare__panel--new li::before{ content:"✓"; color:#35C759; font-weight:700; flex:none; }
+  @media (max-width:820px){ .compare__grid{ grid-template-columns:1fr; } .compare__panel{ min-height:380px; } }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .how{ background:var(--noir-900); }
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .step-card{
+    border-radius:14px;
+    overflow:hidden;
+    background:var(--noir-800);
+    border:1px solid rgba(255,255,255,0.06);
+  }
+  .step-card__img{ height:280px; background-size:cover; background-position:center; position:relative; }
+  .step-card__img .step__num{
+    position:absolute; top:16px; left:16px;
+    font-family:var(--font-mono); font-size:0.8rem; color:#fff;
+    background:var(--red-600); width:40px; height:40px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-weight:700;
+  }
+  .step-card__body{ padding:24px; }
+  .step-card__body h3{ font-family:var(--font-display); text-transform:uppercase; font-weight:400; font-size:1.5rem; }
+  .step-card__body p{ margin-top:10px; color:var(--fog-500); line-height:1.6; font-size:0.94rem; }
+  @media (max-width:900px){ .steps{ grid-template-columns:1fr; } }
+
+  /* ---------- BRAND STATEMENT (full-bleed photo) ---------- */
+  .brand-shot{ padding:0; }
+  .brand-shot__frame{ position:relative; }
+  .brand-shot img{ width:100%; height:auto; display:block; max-height:82vh; object-fit:cover; object-position:center 22%; }
+  .brand-shot__caption{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+    padding:22px var(--edge);
+    background:var(--noir-900);
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fog-500);
+  }
+
+  /* ---------- FEATURES ---------- */
+  .features{ background:var(--paper); color:var(--ink); }
+  .features .section-head p{ color:#5b5b5e; }
+  .feature-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(18,18,20,0.12); border:1px solid rgba(18,18,20,0.12); border-radius:14px; overflow:hidden; }
+  .feature-card{ background:var(--paper); padding:clamp(24px,3vw,34px); transition:background .25s ease; }
+  .feature-card:hover{ background:var(--paper-dim); }
+  .feature-card svg{ width:34px; height:34px; color:var(--ink); transition:color .25s ease; }
+  .feature-card:hover svg{ color:var(--red-600); }
+  .feature-card h3{ margin-top:20px; font-family:var(--font-display); text-transform:uppercase; font-weight:400; font-size:1.25rem; letter-spacing:0.01em; }
+  .feature-card p{ margin-top:10px; font-size:0.88rem; line-height:1.55; color:#5b5b5e; }
+  @media (max-width:980px){ .feature-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:600px){ .feature-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- PRODUCT SPEC ---------- */
+  .spec{ background:var(--noir-950); }
+  .spec__grid{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:clamp(30px,5vw,60px); align-items:center; }
+  .spec__img{ border-radius:16px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); }
+  .spec__img img{ width:100%; height:100%; object-fit:cover; }
+  .spec h2{ font-size:clamp(2rem,4vw,3rem); }
+  .spec p.lead{ margin-top:18px; color:var(--fog-300); line-height:1.65; max-width:46ch; }
+  .spec-table{ margin-top:30px; border-top:1px solid rgba(255,255,255,0.1); }
+  .spec-row{ display:flex; justify-content:space-between; gap:20px; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.1); }
+  .spec-row dt{ font-family:var(--font-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fog-500); }
+  .spec-row dd{ margin:0; font-weight:600; color:var(--fog-100); text-align:right; }
+  .spec__cta{ margin-top:30px; }
+  @media (max-width:900px){ .spec__grid{ grid-template-columns:1fr; } }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials{ background:#fff !important; color:#111 !important; padding-top:clamp(72px,9vw,120px); padding-bottom:clamp(72px,9vw,120px); }
+  .testimonials .wrap{ max-width:1180px; margin:0 auto; }
+  .testimonials .section-head{ text-align:center !important; display:flex; justify-content:center; }
+  .testimonials .section-head h2{ color:#111 !important; text-align:center !important; margin:0 auto; }
+  .test-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:46px; }
+  .test-card{ background:#fff !important; color:#111 !important; border:1px solid #e3e3e3 !important; border-radius:4px; padding:24px 22px; display:flex; flex-direction:column; gap:12px; box-shadow:0 2px 8px rgba(0,0,0,.06); min-height:205px; }
+  .test-card .stars{ color:#159eea !important; letter-spacing:0.04em; font-size:1.12rem; line-height:1; }
+  .test-card p{ line-height:1.5; font-size:0.98rem; color:#333 !important; margin:0; }
+  .test-card footer{ margin-top:auto; font-family:var(--font-body); font-size:0.82rem; letter-spacing:0; text-transform:none; color:#333 !important; font-weight:700; background:transparent !important; padding:0; }
+  .review-name{ display:inline-flex; align-items:center; gap:7px; font-size:1rem; font-weight:700; color:#222 !important; }
+  .verified-tick{ display:inline-flex; align-items:center; justify-content:center; width:15px; height:15px; border-radius:50%; background:#159eea; color:#fff; font-family:Arial,sans-serif; font-size:10px; font-weight:900; line-height:15px; }
+  .review-date{ display:block; margin-top:4px; font-size:.72rem; font-weight:400; color:#555 !important; }
+  .review-show-more{ display:block; margin:34px auto 0; border:1px solid #111; background:#111; color:#fff; padding:14px 30px; border-radius:2px; font-weight:800; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; cursor:pointer; transition:.2s ease; }
+  .review-show-more:hover{ background:#e21b2d; border-color:#e21b2d; }
+  .review-card-hidden{ display:none; }
+  @media (max-width:900px){ .test-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- BRAND STATEMENT: WHITE THEME ---------- */
+  .brand-shot.brand-shot--split{ background:#fff !important; color:#111 !important; display:grid; grid-template-columns:1fr 1fr; min-height:680px; }
+  .brand-shot.brand-shot--split .brand-shot__media{ background:#fff; min-height:680px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .brand-shot.brand-shot--split .brand-shot__media img{ width:296px; height:640px; max-width:296px; max-height:640px; object-fit:contain; object-position:center; display:block; flex:0 0 auto; }
+  .brand-shot.brand-shot--split .brand-shot__content{ background:#fff !important; color:#111 !important; display:flex; flex-direction:column; justify-content:center; padding:clamp(48px,7vw,100px); }
+  .brand-shot.brand-shot--split .brand-shot__content .eyebrow{ color:#e21b2d !important; }
+  .brand-shot.brand-shot--split .brand-shot__content h2{ color:#111 !important; }
+  .brand-shot.brand-shot--split .brand-shot__content h2 em{ color:#e21b2d !important; font-style:normal; }
+  @media (max-width:800px){ .brand-shot.brand-shot--split{ grid-template-columns:1fr; } .brand-shot.brand-shot--split .brand-shot__media{ min-height:500px; } .brand-shot.brand-shot--split .brand-shot__media img{ width:min(296px,80vw); height:auto; max-width:296px; max-height:none; aspect-ratio:852 / 1846; } .brand-shot.brand-shot--split .brand-shot__content{ min-height:420px; } }
+  /* ---------- CTA BAND ---------- */
+  .cta-band{ background:linear-gradient(120deg, var(--red-700), var(--red-600) 60%, var(--red-500)); color:#fff; }
+  .cta-band__inner{ display:flex; align-items:center; justify-content:space-between; gap:28px; flex-wrap:wrap; }
+  .cta-band h2{ font-size:clamp(2rem,4.6vw,3.4rem); max-width:15ch; }
+  .cta-band p{ margin-top:10px; color:rgba(255,255,255,0.85); max-width:36ch; }
+
+  /* ---------- FOOTER ---------- */
+  footer.site-footer{ background:var(--noir-950); color:var(--fog-300); }
+  .footer__top{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:40px; padding-top:clamp(52px,7vw,80px); padding-bottom:44px; }
+  .footer__brand img{ height:24px; margin-bottom:16px; border-radius:3px; }
+  .footer__brand p{ color:var(--fog-500); font-size:0.9rem; line-height:1.6; max-width:32ch; }
+  .footer__social{ display:flex; gap:14px; margin-top:22px; }
+  .footer__social a{ width:36px; height:36px; border:1px solid rgba(255,255,255,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--fog-300); transition:border-color .2s ease, color .2s ease; }
+  .footer__social a:hover{ border-color:var(--red-500); color:var(--red-500); }
+  .footer__col h4{ font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.1em; font-size:0.72rem; color:var(--fog-500); margin-bottom:18px; }
+  .footer__col li{ margin-bottom:12px; }
+  .footer__col a{ font-size:0.9rem; color:var(--fog-300); transition:color .2s ease; }
+  .footer__col a:hover{ color:var(--red-500); }
+  .footer__form{ display:flex; margin-top:16px; border:1px solid rgba(255,255,255,0.18); border-radius:6px; overflow:hidden; }
+  .footer__form input{ flex:1; background:transparent; border:none; padding:12px 16px; color:var(--fog-100); font-family:var(--font-body); font-size:0.85rem; }
+  .footer__form input:focus{ outline:none; }
+  .footer__form button{ background:var(--red-600); color:#fff; border:none; padding:0 20px; font-weight:700; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; }
+  .footer__bottom{ border-top:1px solid rgba(255,255,255,0.08); padding-top:22px; padding-bottom:22px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--fog-500); }
+  @media (max-width:980px){ .footer__top{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:600px){ .footer__top{ grid-template-columns:1fr; } .cta-band__inner{ flex-direction:column; align-items:flex-start; } }
+
+  @media (max-width:980px){
+    .nav__links{ display:none; }
+    .nav__right .btn--ghost-dark{ display:none; }
+    .hamburger{ display:flex; }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{ scroll-behavior:auto; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .hero{ background-attachment:scroll; }
+  }
+
+  /* PRODUCT CAROUSEL */
+  .product-showcase{padding:110px 0 105px;background:#0A0A0B;overflow:hidden;}
+  .product-showcase__grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);gap:72px;align-items:center;}
+  .product-gallery{position:relative;min-width:0;}
+  .product-gallery__viewport{overflow:hidden;border:1px solid rgba(255,255,255,.09);border-radius:18px;background:#000;box-shadow:0 30px 80px rgba(0,0,0,.38);}
+  .product-gallery__track{display:flex;transition:transform .5s cubic-bezier(.22,.61,.36,1);touch-action:pan-y;will-change:transform;}
+  .product-gallery__slide{min-width:100%;aspect-ratio:1/1;position:relative;background:#000;display:flex;align-items:center;justify-content:center;}
+  .product-gallery__slide img{width:100%;height:100%;object-fit:contain;display:block;}
+  .product-gallery__slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.35));pointer-events:none;}
+  .product-gallery__arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(10,10,11,.72);color:#fff;font-size:24px;cursor:pointer;backdrop-filter:blur(8px);}
+  .product-gallery__arrow:hover{background:#E63A2E;border-color:#E63A2E;}
+  .product-gallery__arrow--prev{left:18px}.product-gallery__arrow--next{right:18px}
+  .product-gallery__dots{display:flex;justify-content:center;gap:8px;margin-top:16px;}
+  .product-gallery__dot{width:7px;height:7px;border:0;border-radius:50%;padding:0;background:#555;cursor:pointer;}
+  .product-gallery__dot.is-active{background:#E63A2E;width:24px;border-radius:99px;}
+  .product-info__eyebrow{display:flex;align-items:center;gap:10px;color:#E63A2E;font-family:"IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.18em;font-size:12px;font-weight:600;}
+  .product-info__eyebrow::before{content:"";width:7px;height:7px;background:#E63A2E;display:inline-block;}
+  .product-info h2{font-family:Anton,Impact,sans-serif;font-size:clamp(54px,6vw,92px);line-height:.88;text-transform:uppercase;margin:15px 0 22px;letter-spacing:-.02em;color:#EFEDE8;}
+  .product-info__sub{color:#B9BABE;font-size:17px;line-height:1.65;max-width:560px;margin-bottom:30px;}
+  .product-price{display:flex;align-items:flex-end;gap:13px;margin-bottom:25px;}
+  .product-price__amount{font-family:Anton,Impact,sans-serif;font-size:52px;line-height:1;color:#fff;}
+  .product-price__currency{font-family:"IBM Plex Mono",monospace;color:#8A8B90;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:7px;}
+  .product-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;}
+  .product-meta span{border:1px solid #28282C;border-radius:999px;padding:9px 13px;color:#B9BABE;font-size:12px;font-family:"IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.08em;}
+  .product-buy{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+  .product-buy__btn{border:0;background:#E63A2E;color:#fff;font-weight:800;padding:17px 25px;border-radius:7px;text-transform:uppercase;letter-spacing:.03em;cursor:pointer;font-size:13px;}
+  .product-buy__btn:hover{background:#D31921;}
+  .product-buy__note{font-size:12px;color:#8A8B90;}
+  .product-showcase__label{margin-bottom:18px;color:#8A8B90;font-family:"IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.14em;font-size:11px;}
+  @media(max-width:900px){
+    .product-showcase{padding:75px 0;}
+    .product-showcase__grid{grid-template-columns:1fr;gap:38px;}
+    .product-info{order:-1;}
+    .product-info h2{font-size:58px;}
+  }
+  @media(max-width:560px){
+    .product-showcase__grid{gap:28px;}
+    .product-gallery__slide{aspect-ratio:1/1;}
+    .product-info h2{font-size:48px;}
+    .product-price__amount{font-size:44px;}
+  }
+
+
+  /* ---------- QUANTITY SELECTOR ---------- */
+  .quantity-wrap{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .quantity-label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8A8B90;}
+  .quantity-control{display:inline-flex;align-items:center;border:1px solid #303035;border-radius:8px;overflow:hidden;background:#111113;}
+  .quantity-control button{width:42px;height:42px;border:0;background:#18181B;color:#fff;font-size:22px;line-height:1;cursor:pointer;}
+  .quantity-control button:hover{background:#E63A2E;}
+  .quantity-control input{width:48px;height:42px;border:0;border-left:1px solid #303035;border-right:1px solid #303035;background:#0D0D0F;color:#fff;text-align:center;font-weight:700;font-size:15px;}
+  .quantity-control input::-webkit-inner-spin-button,.quantity-control input::-webkit-outer-spin-button{appearance:none;margin:0;}
+  .quantity-control input[type=number]{-moz-appearance:textfield;}
+  .product-total{font-size:13px;color:#B9BABE;margin-left:4px;}
+  .product-total strong{color:#fff;}
+
+  /* ---------- SPLIT BRAND STATEMENT / SNAPCLIPS-STYLE LAYOUT ---------- */
+  .brand-shot--split{
+    width:100%;
+    min-height:720px;
+    display:grid;
+    grid-template-columns:minmax(0,1.08fr) minmax(420px,.92fr);
+    background:#0A0A0B;
+    overflow:hidden;
+  }
+  .brand-shot--split .brand-shot__media{
+    min-height:720px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#09090A;
+    overflow:hidden;
+  }
+  .brand-shot--split .brand-shot__media img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:center;
+    display:block;
+  }
+  .brand-shot--split .brand-shot__content{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:clamp(48px,7vw,110px) clamp(40px,6vw,96px);
+    background:#0A0A0B;
+  }
+  .brand-shot--split .brand-shot__content .eyebrow{
+    color:#E63A2E;
+    margin-bottom:20px;
+  }
+  .brand-shot--split h2{
+    margin:0;
+    max-width:680px;
+    color:#fff;
+    font-family:var(--font-display);
+    font-size:clamp(3rem,5.4vw,6.8rem);
+    line-height:.9;
+    text-transform:uppercase;
+    letter-spacing:-.025em;
+  }
+  @media(max-width:900px){
+    .brand-shot--split{
+      grid-template-columns:1fr;
+      min-height:auto;
+    }
+    .brand-shot--split .brand-shot__media{
+      min-height:0;
+      height:auto;
+    }
+    .brand-shot--split .brand-shot__media img{
+      width:100%;
+      height:auto;
+      object-fit:contain;
+    }
+    .brand-shot--split .brand-shot__content{
+      min-height:520px;
+      padding:60px var(--edge);
+    }
+  }
+  @media(max-width:600px){
+    .brand-shot--split h2{font-size:clamp(2.7rem,12vw,4.5rem);}
+    .brand-shot--split .brand-shot__content{min-height:430px;}
+  }
+
+
+
+
+  /* ---------- FAQ ---------- */
+  .faq{background:#0A0A0B;color:#EFEDE8;}
+  .faq__list{max-width:920px;border-top:1px solid rgba(255,255,255,.14);}
+  .faq__list details{border-bottom:1px solid rgba(255,255,255,.14);}
+  .faq__list summary{list-style:none;cursor:pointer;padding:24px 46px 24px 0;position:relative;font-size:18px;font-weight:700;}
+  .faq__list summary::-webkit-details-marker{display:none;}
+  .faq__list summary::after{content:"+";position:absolute;right:0;top:18px;font-size:28px;font-weight:300;color:#E63A2E;transition:transform .2s ease;}
+  .faq__list details[open] summary::after{content:"−";}
+  .faq__list details p{color:#A9AAAE;line-height:1.7;max-width:72ch;padding:0 50px 24px 0;}
+
+</style>
+
+<style id="lockrock-reference-type">
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Oswald:wght@400;500;600;700&display=swap');
+
+:root{
+  --ref-serif:"DM Serif Display", Georgia, "Times New Roman", serif;
+  --ref-sans:"Oswald", Impact, Arial Narrow, sans-serif;
+}
+
+.eyebrow,
+.nav,
+.product-buy__note,
+.quantity-label,
+.compare__panel h3,
+.section-head .eyebrow{
+  font-family:var(--ref-sans)!important;
+  letter-spacing:.20em!important;
+  text-transform:uppercase!important;
+}
+
+h1,h2,h3,
+.h-display,
+.hero h1,
+.section-head h2,
+.brand-shot--full h2,
+.product-info h2,
+.compare h2{
+  font-family:var(--ref-serif)!important;
+  font-weight:400!important;
+  letter-spacing:-.035em!important;
+  text-transform:uppercase;
+  line-height:.88!important;
+}
+
+.hero h1,
+.brand-shot--full h2{
+  font-size:clamp(3.8rem,8vw,8.5rem)!important;
+}
+
+.hero h1 em,
+.brand-shot--full h2 em,
+.accent-italic{
+  color:#D91F3D!important;
+  font-family:var(--ref-serif)!important;
+  font-style:italic!important;
+  font-weight:400!important;
+}
+
+.product-info h2{
+  font-size:clamp(3rem,6vw,6rem)!important;
+}
+
+.section-head h2,
+.h-display{
+  font-size:clamp(3rem,6vw,6.5rem)!important;
+}
+
+.hero p,
+.brand-shot--full p,
+.product-info p,
+.compare__panel li,
+.faq__list p{
+  font-family:Inter,Arial,sans-serif!important;
+}
+
+.product-buy__btn,
+button{
+  font-family:var(--ref-sans)!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+}
+
+@media(max-width:700px){
+  .hero h1,
+  .brand-shot--full h2{
+    font-size:clamp(3rem,15vw,5rem)!important;
+  }
+}
+</style>
+
+
+<style id="faq-centered-final">
+  .faq .wrap{
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  .faq .section-head{
+    display:block;
+    text-align:center;
+    margin:0 auto clamp(42px,6vw,64px);
+  }
+
+  .faq .faq-title{
+    margin:0 auto !important;
+    max-width:1000px;
+    text-align:center;
+    font-family:var(--ref-serif), Georgia, "Times New Roman", serif !important;
+    font-size:clamp(3.4rem,7vw,7rem) !important;
+    line-height:.9 !important;
+    letter-spacing:-.035em !important;
+    font-weight:400 !important;
+    text-transform:uppercase;
+  }
+
+  .faq__list{
+    width:100%;
+    max-width:980px;
+    margin:0 auto;
+  }
+
+  .faq__list summary{
+    font-family:Inter, Arial, sans-serif !important;
+    font-size:clamp(17px,1.5vw,20px) !important;
+    font-weight:600 !important;
+  }
+
+  @media(max-width:700px){
+    .faq .faq-title{
+      font-size:clamp(2.8rem,13vw,4.5rem) !important;
+    }
+  }
+</style>
+
+
+<style id="faq-perfect-center">
+/* FAQ: true centered composition */
+.faq {
+  background:#fff !important;
+}
+
+.faq > .wrap,
+.faq .wrap {
+  width:100% !important;
+  max-width:1200px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+.faq .section-head {
+  width:100% !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+.faq .faq-title,
+.faq .section-head h2 {
+  width:100% !important;
+  max-width:1100px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  text-align:center !important;
+  align-self:center !important;
+}
+
+.faq__list {
+  width:100% !important;
+  max-width:980px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+.faq__list details,
+.faq__list summary {
+  width:100% !important;
+}
+
+@media (max-width:700px) {
+  .faq .section-head,
+  .faq .faq-title,
+  .faq .section-head h2 {
+    text-align:center !important;
+  }
+}
+</style>
+
+
+<style id="final-white-theme-visibility">
+/* =========================================================
+   LOCKROCK FINAL THEME
+   Hero remains dark; everything after hero is WHITE.
+   ========================================================= */
+
+body {
+  background:#fff !important;
+  color:#111 !important;
+}
+
+/* Keep the first/hero area dark */
+.hero,
+.hero-section,
+.hero-wrap {
+  color:#fff;
+}
+
+/* Everything after the hero */
+main > section:not(.hero),
+main section:not(.hero),
+section:not(.hero),
+.product,
+.product-section,
+.compare,
+.compare-section,
+.faq,
+.faq-section,
+.brand-shot,
+.brand-shot--full,
+.how,
+.how-section,
+.reviews,
+.review-section,
+.features,
+.feature-section,
+footer {
+  background:#fff !important;
+  color:#111 !important;
+}
+
+/* Black text on white */
+main section:not(.hero) h1,
+main section:not(.hero) h2,
+main section:not(.hero) h3,
+main section:not(.hero) h4,
+main section:not(.hero) p,
+main section:not(.hero) li,
+main section:not(.hero) span,
+main section:not(.hero) label,
+main section:not(.hero) dt,
+main section:not(.hero) dd,
+.product h1, .product h2, .product h3, .product p,
+.compare h1, .compare h2, .compare h3, .compare p,
+.faq h1, .faq h2, .faq h3, .faq p,
+.faq summary,
+.brand-shot h1, .brand-shot h2, .brand-shot h3, .brand-shot p {
+  color:#111 !important;
+}
+
+/* Secondary text */
+main section:not(.hero) .muted,
+main section:not(.hero) .eyebrow,
+main section:not(.hero) .section-kicker,
+main section:not(.hero) .subtle {
+  color:#555 !important;
+}
+
+/* Red brand accents */
+main section:not(.hero) .accent,
+main section:not(.hero) .red,
+main section:not(.hero) .eyebrow::before,
+main section:not(.hero) .section-kicker {
+  color:#e21b2d !important;
+}
+
+/* Borders/dividers visible on white */
+main section:not(.hero) hr,
+main section:not(.hero) .divider,
+main section:not(.hero) .faq__list details,
+main section:not(.hero) .faq__list {
+  border-color:#d8d8d8 !important;
+}
+
+/* FAQ */
+.faq {
+  background:#fff !important;
+  color:#111 !important;
+}
+.faq .faq-title,
+.faq .section-head h2 {
+  color:#111 !important;
+  text-align:center !important;
+}
+.faq__list summary {
+  color:#111 !important;
+}
+.faq__list p {
+  color:#444 !important;
+}
+.faq__list .plus,
+.faq__list .minus,
+.faq__list summary::after {
+  color:#e21b2d !important;
+}
+
+/* Buttons remain branded */
+main section:not(.hero) button,
+main section:not(.hero) .btn,
+main section:not(.hero) a.btn {
+  color:#fff !important;
+  background:#e21b2d !important;
+}
+
+/* Product price / quantity */
+.product-price,
+.price {
+  color:#111 !important;
+}
+.quantity,
+.quantity button,
+.quantity input {
+  color:#111 !important;
+  background:#fff !important;
+  border-color:#ccc !important;
+}
+
+/* Navigation stays dark */
+header,
+nav,
+.site-header {
+  background:#101010 !important;
+  color:#fff !important;
+}
+header a,
+nav a,
+.site-header a {
+  color:#fff !important;
+}
+
+/* Footer: white theme */
+footer {
+  background:#fff !important;
+  color:#111 !important;
+}
+footer a,
+footer p,
+footer span,
+footer h3,
+footer h4 {
+  color:#111 !important;
+}
+
+/* Ensure images don't get darkened by inherited overlays outside hero */
+main section:not(.hero) .overlay,
+main section:not(.hero) .image-overlay {
+  background:transparent !important;
+}
+
+/* Mobile */
+@media (max-width:700px) {
+  main section:not(.hero),
+  .faq,
+  footer {
+    background:#fff !important;
+    color:#111 !important;
+  }
+}
+</style>
+
+
+<style id="final-white-theme-v2">
+/* FINAL PASS — WHITE SITE AFTER HERO */
+body{background:#fff!important;color:#111!important;}
+
+/* Navigation stays dark */
+header.nav{background:rgba(10,10,11,.97)!important;color:#fff!important;border-bottom:1px solid rgba(255,255,255,.08)!important;}
+header.nav .nav__links a{color:#fff!important;}
+header.nav .nav__links a:hover{color:#E63A2E!important;}
+header.nav .btn--ghost-dark{color:#fff!important;border-color:rgba(255,255,255,.25)!important;}
+header.nav .hamburger span{background:#fff!important;}
+.mobile-menu{background:#111!important;}
+.mobile-menu a{color:#fff!important;}
+
+/* Trust strip */
+.trust-bar{background:#fff!important;color:#111!important;border-color:#ddd!important;}
+.trust-item{color:#222!important;}
+.trust-item .stars{color:#159eea!important;}
+
+/* Product */
+.product-showcase{background:#fff!important;color:#111!important;}
+.product-showcase__label{color:#555!important;}
+.product-gallery__viewport{background:#000!important;border-color:#222!important;box-shadow:0 20px 55px rgba(0,0,0,.18)!important;}
+.product-gallery__slide{background:#000!important;}
+.product-gallery__slide::after{background:none!important;}
+.product-gallery__arrow{background:rgba(255,255,255,.95)!important;color:#111!important;border-color:#ccc!important;box-shadow:0 4px 16px rgba(0,0,0,.12);}
+.product-gallery__arrow:hover{background:#E63A2E!important;color:#fff!important;border-color:#E63A2E!important;}
+.product-info__eyebrow{color:#E63A2E!important;}
+.product-info h2{color:#111!important;}
+.product-info__sub{color:#444!important;}
+.product-price__amount{color:#111!important;}
+.product-price__currency{color:#666!important;}
+.product-meta span{border-color:#d7d7d7!important;color:#444!important;background:#fff!important;}
+.quantity-label{color:#555!important;}
+.quantity-control{background:#fff!important;border-color:#ccc!important;}
+.quantity-control button{background:#fff!important;color:#111!important;}
+.quantity-control button:hover{background:#E63A2E!important;color:#fff!important;}
+.quantity-control input{background:#fff!important;color:#111!important;border-color:#ccc!important;}
+.product-total{color:#555!important;}
+.product-total strong{color:#111!important;}
+.product-buy__note{color:#666!important;}
+
+/* Comparison — white cards with readable black copy */
+.compare{background:#fff!important;color:#111!important;}
+.compare .section-head h2,.compare .section-head p{color:#111!important;}
+.compare .section-head p{color:#555!important;}
+.compare__grid{gap:18px!important;overflow:visible!important;}
+.compare__panel{border:1px solid #ddd!important;border-radius:14px!important;min-height:560px!important;overflow:hidden!important;padding:clamp(26px,3.5vw,40px)!important;}
+.compare__panel--old{background-image:linear-gradient(180deg,rgba(255,255,255,0) 25%,rgba(255,255,255,.72) 54%,#fff 78%,#fff 100%),url('assets/struggle-old.jpg')!important;background-position:center top!important;}
+.compare__panel--new{background-image:linear-gradient(180deg,rgba(255,255,255,0) 25%,rgba(255,255,255,.72) 54%,#fff 78%,#fff 100%),url('assets/product-lockdown.jpg')!important;background-position:center top!important;}
+.compare__panel h3,.compare__panel--old h3,.compare__panel--new h3{color:#111!important;}
+.compare__panel li,.compare__panel--old li,.compare__panel--new li{color:#111!important;border-top-color:#ddd!important;}
+.compare__panel--old li::before{color:#E63A2E!important;}
+.compare__panel--new li::before{color:#16a34a!important;}
+
+/* How it works */
+.how{background:#fff!important;color:#111!important;}
+.how .section-head h2{color:#111!important;}
+.step-card{background:#fff!important;border-color:#ddd!important;box-shadow:0 8px 24px rgba(0,0,0,.06)!important;}
+.step-card__body h3{color:#111!important;}
+.step-card__body p{color:#555!important;}
+
+/* Brand statement — normal-sized image on left, text on right */
+.brand-shot--split{background:#fff!important;color:#111!important;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important;min-height:650px!important;overflow:hidden!important;}
+.brand-shot--split .brand-shot__media{background:#fff!important;min-height:650px!important;padding:clamp(28px,4vw,64px)!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;}
+.brand-shot--split .brand-shot__media img{width:min(100%,620px)!important;height:auto!important;max-height:600px!important;object-fit:contain!important;object-position:center!important;}
+.brand-shot--split .brand-shot__content{background:#fff!important;color:#111!important;padding:clamp(48px,6vw,92px)!important;justify-content:center!important;}
+.brand-shot--split .brand-shot__content .eyebrow{color:#E21B2D!important;}
+.brand-shot--split .brand-shot__content h2{color:#111!important;font-size:clamp(3.1rem,5.5vw,6.4rem)!important;line-height:.9!important;}
+.brand-shot--split .brand-shot__content h2 em{color:#E21B2D!important;}
+
+/* Features */
+.features{background:#fff!important;color:#111!important;}
+.features .section-head h2,.features .section-head p{color:#111!important;}
+.features .section-head p{color:#555!important;}
+.feature-grid{background:#ddd!important;border-color:#ddd!important;}
+.feature-card{background:#fff!important;color:#111!important;}
+.feature-card h3{color:#111!important;}
+.feature-card p{color:#555!important;}
+
+/* Reviews */
+.testimonials{background:#fff!important;color:#111!important;}
+.testimonials .section-head h2{color:#111!important;}
+.test-grid{align-items:stretch!important;}
+.test-card{background:#fff!important;color:#111!important;border-color:#ddd!important;box-shadow:0 3px 12px rgba(0,0,0,.06)!important;}
+.test-card p{color:#333!important;}
+.test-card footer{color:#222!important;background:transparent!important;}
+.review-name{color:#111!important;}
+.review-date{color:#666!important;}
+.test-card .stars{color:#159eea!important;}
+.review-show-more{background:#111!important;color:#fff!important;border-color:#111!important;}
+.review-show-more:hover{background:#E21B2D!important;border-color:#E21B2D!important;}
+
+/* FAQ */
+.faq{background:#fff!important;color:#111!important;}
+.faq .faq-title,.faq .section-head h2{color:#111!important;}
+.faq__list{border-top-color:#d8d8d8!important;}
+.faq__list details{border-bottom-color:#d8d8d8!important;}
+.faq__list summary{color:#111!important;}
+.faq__list details p{color:#444!important;}
+.faq__list summary::after{color:#E21B2D!important;}
+
+/* CTA and footer are also white; red remains the conversion accent */
+.cta-band{background:#fff!important;color:#111!important;border-top:1px solid #eee!important;}
+.cta-band h2{color:#111!important;}
+.cta-band p{color:#555!important;}
+.cta-band .btn--white{background:#E21B2D!important;color:#fff!important;}
+footer.site-footer{background:#fff!important;color:#111!important;border-top:1px solid #eee!important;}
+.footer__brand p,.footer__col a,.footer__col h4,.footer__bottom,.footer__form input{color:#555!important;}
+.footer__col h4{color:#777!important;}
+.footer__social a{color:#333!important;border-color:#ccc!important;}
+.footer__form{border-color:#ccc!important;}
+.footer__form input{background:#fff!important;}
+
+@media(max-width:900px){
+  .compare__grid{grid-template-columns:1fr!important;}
+  .compare__panel{min-height:480px!important;}
+  .brand-shot--split{grid-template-columns:1fr!important;min-height:auto!important;}
+  .brand-shot--split .brand-shot__media{min-height:0!important;padding:28px!important;}
+  .brand-shot--split .brand-shot__media img{max-height:560px!important;width:min(100%,560px)!important;}
+  .brand-shot--split .brand-shot__content{min-height:440px!important;}
+}
+
+
+  /* Contact number stays hidden until Contact Us is clicked */
+  .contact-trigger{
+    appearance:none; border:0; background:none; padding:0; margin:0;
+    font:inherit; color:inherit; cursor:pointer; text-align:left;
+  }
+  .contact-trigger:hover{ color:var(--red-500); }
+  .contact-modal{ position:fixed; inset:0; z-index:9999; display:none; align-items:center; justify-content:center; padding:24px; }
+  .contact-modal.is-open{ display:flex; }
+  .contact-modal__backdrop{ position:absolute; inset:0; background:rgba(0,0,0,.62); backdrop-filter:blur(5px); }
+  .contact-modal__dialog{ position:relative; width:min(520px,100%); background:#fff; color:#111; border-radius:18px; padding:42px; box-shadow:0 24px 80px rgba(0,0,0,.28); }
+  .contact-modal__close{ position:absolute; top:12px; right:16px; width:36px; height:36px; border:0; background:transparent; color:#111; font-size:30px; line-height:1; cursor:pointer; }
+  .contact-modal__eyebrow{ margin:0 0 12px; color:#e51d2a; font-family:var(--font-mono); font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; }
+  .contact-modal__dialog h2{ margin:0 0 12px; font-family:var(--font-display); font-size:clamp(2.2rem,6vw,4rem); line-height:.95; text-transform:uppercase; }
+  .contact-modal__copy{ margin:0 0 24px; color:#555; line-height:1.6; }
+  .contact-modal__phone{ display:inline-block; color:#111; font-size:1.35rem; font-weight:700; text-decoration:none; border-bottom:2px solid #e51d2a; padding-bottom:4px; }
+  @media (max-width:600px){ .contact-modal__dialog{ padding:34px 26px; } }
+</style>
+
+</head>
+<body>
+
+<header class="nav" id="siteNav">
+  <div class="wrap nav__inner">
+    <a href="#top" class="nav__logo"><img src="assets/logo-badge.jpg" alt="LOCKROCK"></a>
+    <nav class="nav__links">
+      <a href="#compare">Why LockRock</a>
+      <a href="#how">How It Works</a>
+      <a href="#shop">The Collar</a>
+      <a href="#reviews">Reviews</a>
+    </nav>
+    <div class="nav__right">
+      <a href="#shop" class="btn btn--ghost-dark btn--small">Learn More</a>
+      <a href="#shop" class="btn btn--red btn--small">Shop Now</a>
+      <button type="button" class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#compare">Why LockRock</a>
+    <a href="#how">How It Works</a>
+    <a href="#shop">The Collar</a>
+    <a href="#reviews">Reviews</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero__inner">
+      <span class="eyebrow">Hook-&-Loop Barbell Collar</span>
+      <h1 class="h-display hero__title" style="margin-top:18px;">No slip.<br>No wobble.<br><span class="accent">No waiting.</span></h1>
+      <p class="hero__sub">LockRock trades bulky screw collars for one wrap and press strap, a high tack grip that holds through your heaviest set and peels off in under a second.</p>
+      <div class="hero__ctas">
+        <a href="https://rzp.io/rzp/zl5E0r7F" class="btn btn--red">Shop LockRock →</a>
+        <a href="#how" class="btn btn--ghost-dark">How It Works ▸</a>
+      </div>
+      <div class="hero__specs">
+        <div>Off In<strong>&lt; 1 sec</strong></div>
+        <div>Bar Fit<strong>Universal</strong></div>
+        <div>Sold As<strong>Pair</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="wrap trust-bar__inner">
+      <div class="trust-item"><span class="stars">★★★★★</span> Rated by lifters</div>
+      <div class="trust-item">Peels off in under a second</div>
+      <div class="trust-item">Fits Universal bars</div>
+      <div class="trust-item">Free shipping over ₹2,000</div>
+    </div>
+  </div>
+
+  <!-- COMPARE -->
+
+  <!-- PRODUCT SHOWCASE -->
+  <section class="product-showcase" id="shop">
+    <div class="wrap product-showcase__grid">
+      <div class="product-gallery reveal" aria-label="LockRock product gallery">
+        <div class="product-showcase__label">LockRock · The Barbell Collar</div>
+        <div class="product-gallery__viewport" id="productGallery">
+          <div class="product-gallery__track" id="productTrack">
+            <div class="product-gallery__slide"><img src="assets/lockrock-pair-square.png" alt="LockRock collars pair"></div>
+            <div class="product-gallery__slide"><img src="assets/lockrock-barbell-square.png" alt="LockRock collar secured on a loaded barbell"></div>
+            <div class="product-gallery__slide"><img src="assets/standing-lift-full.png" alt="Athlete standing with a loaded barbell secured with LockRock"></div>
+            <div class="product-gallery__slide"><img src="assets/female-athlete.jpg" alt="Female athlete performing an overhead press with LockRock on the barbell"></div>
+            <div class="product-gallery__slide"><img src="assets/lockrock-barbell-closeup-square.png" alt="LockRock collar secured against a weight plate on a barbell"></div>
+          </div>
+        </div>
+        <button class="product-gallery__arrow product-gallery__arrow--prev" id="galleryPrev" aria-label="Previous product image">‹</button>
+        <button type="button" class="product-gallery__arrow product-gallery__arrow--next" id="galleryNext" aria-label="Next product image">›</button>
+        <div class="product-gallery__dots" id="galleryDots" aria-label="Choose product image">
+          <button class="product-gallery__dot is-active" aria-label="Image 1"></button>
+          <button class="product-gallery__dot" aria-label="Image 2"></button>
+          <button class="product-gallery__dot" aria-label="Image 3"></button>
+          <button class="product-gallery__dot" aria-label="Image 4"></button>
+          <button class="product-gallery__dot" aria-label="Image 5"></button>
+        </div>
+      </div>
+
+      <div class="product-info reveal">
+        <div class="product-info__eyebrow">The LockRock Collar</div>
+        <h2>NO SLIP.<br>NO WOBBLE.</h2>
+        <p class="product-info__sub">Wrap it. Press it. Lock it. A simple hook-and-loop barbell collar designed to keep your plates where they belong through every rep.</p>
+        <div class="product-price">
+          <span class="product-price__amount">₹485</span>
+          <span class="product-price__currency">Per Pair</span>
+        </div>
+        <div class="product-meta">
+          <span>Red / Black</span>
+          <span>Pair of 2</span>
+          <span>Universal Bars</span>
+        </div>
+        <div class="quantity-wrap">
+          <span class="quantity-label">Quantity</span>
+          <div class="quantity-control" aria-label="Product quantity">
+            <button disabled aria-disabled="true" type="button" id="qtyMinus" aria-label="Decrease quantity">−</button>
+            <input id="productQty" type="number" value="1" min="1" max="99" aria-label="Quantity">
+            <button disabled aria-disabled="true" type="button" id="qtyPlus" aria-label="Increase quantity">+</button>
+          </div><div class="quantity-checkout-note" style="font-size:13px;margin-top:8px;text-align:center;opacity:.75;">Update quantity at checkout</div>
+          <span class="product-total">Total: <strong id="productTotal">₹485</strong></span>
+        </div>
+        <div class="product-buy">
+          <a href="https://rzp.io/rzp/zl5E0r7F" class="product-buy__btn" style="display:inline-block;text-decoration:none;">Shop LockRock →</a>
+          <span class="product-buy__note">Pair of 2 collars · ₹485 per pair</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare" id="compare">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="h-display">Ordinary clips<br>make you work<br>for it.</h2>
+        <p>Spring collars pinch. Screw collars back out. LockRock replaces the fight with a single wrap.</p>
+      </div>
+      <div class="compare__grid reveal">
+        <div class="compare__panel compare__panel--old">
+          <h3>The Old Way</h3>
+          <ul>
+            <li>Fighting a stiff spring collar with both hands</li>
+            <li>Threads that back out mid-set</li>
+            <li>Fingers pinched on release</li>
+            <li>Seconds lost every single time you load a plate</li>
+          </ul>
+        </div>
+        <div class="compare__panel compare__panel--new">
+          <h3>LockRock</h3>
+          <ul>
+            <li>Wrap, press, done — one hand, one motion</li>
+            <li>Hook-and-loop face holds under full load</li>
+            <li>Nothing to pinch, nothing to strip</li>
+            <li>Off in under a second when you're done</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="h-display" style="margin-top:14px;">Wrap. Press. Locked.</h2>
+      </div>
+      <div class="steps">
+        <div class="step-card reveal">
+          <div class="step-card__img" style="background-image:url('assets/wrap-step.jpg');">
+            <span class="step__num">01</span>
+          </div>
+          <div class="step-card__body">
+            <h3>Wrap</h3>
+            <p>Loop the strap around the sleeve and pull it snug against the plate.</p>
+          </div>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-card__img" style="background-image:url('assets/product-lockdown.jpg');">
+            <span class="step__num">02</span>
+          </div>
+          <div class="step-card__body">
+            <h3>Press</h3>
+            <p>Press the hook-and-loop face flat for full-contact grip — no threading required.</p>
+          </div>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-card__img" style="background-image:url('assets/female-athlete.jpg'); background-position:center 15%;">
+            <span class="step__num">03</span>
+          </div>
+          <div class="step-card__body">
+            <h3>Locked</h3>
+            <p>Holds through max-effort lifts and dropped plates, until you peel it back yourself.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND STATEMENT -->
+  <section class="brand-shot brand-shot--split reveal" aria-label="LockRock lifting statement">
+    <div class="brand-shot__media">
+      <img src="assets/hero-main.jpg" alt="LockRock athlete lifting with a loaded barbell">
+    </div>
+    <div class="brand-shot__content">
+      <span class="eyebrow">REAL LIFTERS · REAL LOAD</span>
+      <h2>STOP ADJUSTING.<br><em>START LIFTING.</em><br>WITH A CLEAN FORM.</h2>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="h-display">Built for the<br>loaded bar.</h2>
+        <p>Every detail engineered around one job: staying put when it matters.</p>
+      </div>
+      <div class="feature-grid reveal">
+        <div class="feature-card">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 20c0-5 4-9 9-9"/>
+            <path d="M27 12l3 3-3 3"/>
+            <rect x="8" y="24" width="24" height="9" rx="2.5"/>
+            <path d="M14 24v-3a2 2 0 0 1 2-2h2"/>
+          </svg>
+          <h3>One-Hand Wrap</h3>
+          <p>Loop and press with a single hand while the other steadies the plate.</p>
+        </div>
+        <div class="feature-card">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 20c2-6 4-6 6 0s4 6 6 0 4-6 6 0 4 6 6 0"/>
+            <path d="M8 28h24"/>
+          </svg>
+          <h3>Zero-Slip Grip</h3>
+          <p>The high-tack hook-and-loop face holds its bite rep after rep, set after set.</p>
+        </div>
+        <div class="feature-card">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="16" cy="20" r="10"/>
+            <circle cx="26" cy="20" r="5"/>
+            <path d="M16 8v-3M16 35v-3"/>
+          </svg>
+          <h3>Fits Every Sleeve</h3>
+          <p>The flexible strap adjusts to both Universal bar fit.</p>
+        </div>
+        <div class="feature-card">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="22" height="22" rx="4"/>
+            <path d="M14 20l4 4 8-8"/>
+          </svg>
+          <h3>Gym-Bag Tough</h3>
+          <p>Abrasion-resistant nylon shell shrugs off drops, sweat, and chalk dust.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="reviews">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="h-display">Lifters notice<br>the difference.</h2>
+      </div>
+      <div class="test-grid reveal" id="reviewGrid">
+        <article class="test-card">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“The wrap takes seconds and the plates stay exactly where I put them. Much cleaner than fighting with spring collars between sets.”</p>
+          <footer><span class="review-name">Ritvij Mehra <span class="verified-tick">✓</span></span><span class="review-date">18/08/2026</span></footer>
+        </article>
+        <article class="test-card">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“Really like how quick these are. I can lock the bar and get straight into the set without stopping to adjust the plates.”</p>
+          <footer><span class="review-name">Aarav Bhandari <span class="verified-tick">✓</span></span><span class="review-date">17/08/2026</span></footer>
+        </article>
+        <article class="test-card">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“The biggest difference is the simplicity. Wrap, press and lift. No screw to tighten and no spring collar digging into my fingers.”</p>
+          <footer><span class="review-name">Pranav Kulkarni <span class="verified-tick">✓</span></span><span class="review-date">16/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“Feels secure during heavy sets and takes almost no time to put on or remove.”</p>
+          <footer><span class="review-name">Vedant Chaturvedi <span class="verified-tick">✓</span></span><span class="review-date">15/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“Finally a collar that does not make me pause my workout. The fit is simple and the closure feels solid.”</p>
+          <footer><span class="review-name">Nihir Venkatesh <span class="verified-tick">✓</span></span><span class="review-date">14/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“Great for quick plate changes. I keep a pair in my gym bag and use them every session.”</p>
+          <footer><span class="review-name">Yuvan Subramaniam <span class="verified-tick">✓</span></span><span class="review-date">13/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“The one-hand operation is the best part. I do not need to fight the collar while holding the bar.”</p>
+          <footer><span class="review-name">Adit Raghavan <span class="verified-tick">✓</span></span><span class="review-date">12/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“Looks premium, packs small and does exactly what a barbell collar should do.”</p>
+          <footer><span class="review-name">Rishit Nair <span class="verified-tick">✓</span></span><span class="review-date">11/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“No more re-adjusting the plates after a set. LockRock has made my training flow way smoother.”</p>
+          <footer><span class="review-name">Dhruvansh Iyer <span class="verified-tick">✓</span></span><span class="review-date">10/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“Super straightforward. It feels like a small upgrade, but it makes every session less annoying.”</p>
+          <footer><span class="review-name">Tanishq Shetty <span class="verified-tick">✓</span></span><span class="review-date">09/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“The strap wraps neatly around the sleeve and the hook-and-loop face gives a really confident hold.”</p>
+          <footer><span class="review-name">Reyansh Bhatt <span class="verified-tick">✓</span></span><span class="review-date">08/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“I wanted something faster than a spring collar and this is exactly that. Quick on, quick off.”</p>
+          <footer><span class="review-name">Lakshya Menon <span class="verified-tick">✓</span></span><span class="review-date">07/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“The setup is fast and the collar stays put while I focus on the lift.”</p>
+          <footer><span class="review-name">Aviraj Goswami <span class="verified-tick">✓</span></span><span class="review-date">06/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“Much easier than tightening a screw collar between sets. The wrap is simple and clean.”</p>
+          <footer><span class="review-name">Shreyansh Khatri <span class="verified-tick">✓</span></span><span class="review-date">05/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“Solid feel and very easy to carry. I like that there is nothing bulky to lose in the gym bag.”</p>
+          <footer><span class="review-name">Rudransh Pillai <span class="verified-tick">✓</span></span><span class="review-date">04/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“The closure feels strong and plate changes are noticeably faster.”</p>
+          <footer><span class="review-name">Eshaan Vardhan <span class="verified-tick">✓</span></span><span class="review-date">03/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“Clean design and quick operation. It does not get in the way when I am moving fast.”</p>
+          <footer><span class="review-name">Vihaan Narang <span class="verified-tick">✓</span></span><span class="review-date">02/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“I like the one-motion setup. Wrap it, press it and get back under the bar.”</p>
+          <footer><span class="review-name">Aayansh Dutta <span class="verified-tick">✓</span></span><span class="review-date">01/08/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“The collar feels secure without the usual spring-collar struggle.”</p>
+          <footer><span class="review-name">Kairav Bansal <span class="verified-tick">✓</span></span><span class="review-date">31/07/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“Simple product, but it removes a surprisingly annoying part of every workout.”</p>
+          <footer><span class="review-name">Arnavjeet Suri <span class="verified-tick">✓</span></span><span class="review-date">30/07/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“Easy to use and easy to remove. The strap format makes sense once you try it.”</p>
+          <footer><span class="review-name">Raghavendra Pai <span class="verified-tick">✓</span></span><span class="review-date">29/07/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“Keeps the plates positioned well and saves time when switching loads.”</p>
+          <footer><span class="review-name">Tanmayveer Rao <span class="verified-tick">✓</span></span><span class="review-date">28/07/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“Feels more streamlined than traditional collars and looks good on the bar too.”</p>
+          <footer><span class="review-name">Ahaanveer Chawla <span class="verified-tick">✓</span></span><span class="review-date">27/07/2026</span></footer>
+        </article>
+        <article class="test-card review-card-hidden">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <p>“Quick, compact and straightforward. Exactly the kind of gym accessory I wanted.”</p>
+          <footer><span class="review-name">Devanshith Roy <span class="verified-tick">✓</span></span><span class="review-date">26/07/2026</span></footer>
+        </article>
+      </div>
+      <button class="review-show-more" id="showMoreReviews" type="button" aria-expanded="false">Show More Reviews</button>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+<section class="faq" id="faq">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="h-display faq-title">Everything you need<br>to know.</h2>
+      </div>
+      <div class="faq__list reveal">
+        <details open>
+          <summary>How does LockRock work?</summary>
+          <p>Wrap the strap around the bar sleeve, pull it snug against the plate, then press the hook-and-loop face flat. That's it.</p>
+        </details>
+        <details>
+          <summary>What is your return policy?</summary>
+          <p>We have a 7 day return policy.</p>
+        </details>
+        <details>
+          <summary>Will it fit my barbell?</summary>
+          <p>LockRock is designed with a universal bar fit.</p>
+        </details>
+        <details>
+          <summary>How many collars do I get?</summary>
+          <p>Each order includes one pair — two LockRock collars.</p>
+        </details>
+        <details>
+          <summary>How much does it cost?</summary>
+          <p>The current listed price is ₹485 per pair.</p>
+        </details>
+        <details>
+          <summary>Is it easy to remove?</summary>
+          <p>Yes. Peel the hook-and-loop closure back and the collar comes off quickly without threading or a screw mechanism.</p>
+        </details>
+        <details>
+          <summary>Can I use it for heavy lifting?</summary>
+          <p>LockRock is designed around a full-contact hook-and-loop closure for a secure hold during loaded-bar training.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <div class="wrap cta-band__inner">
+      <div>
+        <h2 class="h-display">Lock your world with LockRock.</h2>
+        <p>Free shipping on orders over ₹2,000. One wrap, zero slip, every set.</p>
+      </div>
+      <a href="#shop" class="btn btn--white">Shop Now →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer__top">
+    <div class="footer__brand">
+      <img src="assets/logo-badge.jpg" alt="LOCKROCK">
+      <p>Hook-and-loop barbell collars engineered for a one-hand lock and a grip that outlasts the bar.</p>
+
+    </div>
+    <div class="footer__col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#shop">Barbell Collars</a></li>
+        <li><a href="#how">How To Use</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#top">About Us</a></li>
+        <li><a href="#compare">Why LockRock</a></li>
+        <li><button type="button" class="contact-trigger" id="contactTrigger" aria-haspopup="dialog" aria-controls="contactModal">WhatsApp Us</button></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Stay Locked In</h4>
+      <p style="font-size:0.85rem; color:var(--fog-500); line-height:1.5;">Sign up for early access to restocks and new colorways.</p>
+      <form class="footer__form" id="signupForm">
+        <input type="email" placeholder="Enter your email" aria-label="Email address">
+        <button type="submit">Join</button>
+      </form>
+    </div>
+  </div>
+  <div class="wrap footer__bottom">
+    <span>© 2026 LockRock. All rights reserved.</span>
+    <span>Redesign concept</span>
+  </div>
+</footer>
+
+<!-- Contact reveal -->
+<div class="contact-modal" id="contactModal" aria-hidden="true">
+  <div class="contact-modal__backdrop" data-contact-close></div>
+  <div class="contact-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+    <button class="contact-modal__close" type="button" aria-label="Close contact dialog" data-contact-close>×</button>
+    <p class="contact-modal__eyebrow">WhatsApp Us</p>
+    <h2 id="contactModalTitle">Talk to LockRock.</h2>
+    <p class="contact-modal__copy">Have a question about LockRock or your order? Give us a call.</p>
+    <a class="contact-modal__phone" href="tel:+918310860018">+91 8310860018</a>
+  </div>
+</div>
+
+<script>
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 8); }, { passive:true });
+
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburgerBtn.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburgerBtn.setAttribute('aria-expanded', open);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburgerBtn.setAttribute('aria-expanded','false');
+  }));
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, { threshold:0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+</script>
+
+
+<script>
+  const signupForm = document.getElementById('signupForm');
+  if (signupForm) {
+    signupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = signupForm.querySelector('input');
+      const button = signupForm.querySelector('button');
+      if (!input.value.trim()) return;
+      button.textContent = 'Joined ✓';
+      input.value = '';
+      input.placeholder = 'You’re on the list';
+    });
+  }
+</script>
+
+<script>
+(function(){
+  const track=document.getElementById('productTrack');
+  const viewport=document.getElementById('productGallery');
+  const dots=[...document.querySelectorAll('.product-gallery__dot')];
+  const prev=document.getElementById('galleryPrev');
+  const next=document.getElementById('galleryNext');
+  if(!track || !viewport) return;
+  let index=0, startX=0, currentX=0, dragging=false;
+  const slideCount=track.querySelectorAll(".product-gallery__slide").length;
+  function goTo(i){
+    index=(i+slideCount)%slideCount;
+    track.style.transform=`translateX(-${index*100}%)`;
+    dots.forEach((d,n)=>d.classList.toggle('is-active',n===index));
+  }
+  prev?.addEventListener('click',()=>goTo(index-1));
+  next?.addEventListener('click',()=>goTo(index+1));
+  dots.forEach((d,n)=>d.addEventListener('click',()=>goTo(n)));
+  viewport.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;dragging=true;},{passive:true});
+  viewport.addEventListener('touchmove',e=>{if(dragging) currentX=e.touches[0].clientX;},{passive:true});
+  viewport.addEventListener('touchend',()=>{if(!dragging)return;const delta=currentX-startX;if(Math.abs(delta)>45)goTo(index+(delta<0?1:-1));startX=currentX=0;dragging=false;});
+  let auto=setInterval(()=>goTo(index+1),5000);
+  viewport.addEventListener('mouseenter',()=>clearInterval(auto));
+  viewport.addEventListener('mouseleave',()=>auto=setInterval(()=>goTo(index+1),5000));
+})();
+</script>
+
+<script>
+
+  // Product quantity
+  const qtyInput = document.getElementById('productQty');
+  const qtyMinus = document.getElementById('qtyMinus');
+  const qtyPlus = document.getElementById('qtyPlus');
+  const productTotal = document.getElementById('productTotal');
+  const pairPrice = 485;
+  function updateQuantity() {
+    let qty = parseInt(qtyInput.value, 10) || 1;
+    qty = Math.max(1, Math.min(99, qty));
+    qtyInput.value = qty;
+    productTotal.textContent = '₹' + (qty * pairPrice).toLocaleString('en-IN');
+  }
+  qtyMinus?.addEventListener('click', () => { qtyInput.value = Math.max(1, (parseInt(qtyInput.value,10)||1)-1); updateQuantity(); });
+  qtyPlus?.addEventListener('click', () => { qtyInput.value = Math.min(99, (parseInt(qtyInput.value,10)||1)+1); updateQuantity(); });
+  qtyInput?.addEventListener('input', updateQuantity);
+
+</script>
+
+<script>
+(function(){
+  const btn=document.getElementById('showMoreReviews');
+  const grid=document.getElementById('reviewGrid');
+  if(!btn || !grid) return;
+  const batchSize=3;
+  let shown=3;
+  const cards=[...grid.querySelectorAll('.test-card')];
+  function render(){
+    cards.forEach((card,index)=>{ card.style.display=index<shown?'flex':'none'; });
+    const remaining=cards.length-shown;
+    if(remaining>0){
+      btn.style.display='block';
+      btn.textContent=`Show More Reviews (${Math.min(batchSize,remaining)} more)`;
+      btn.setAttribute('aria-expanded', shown>3?'true':'false');
+    }else{
+      btn.style.display='none';
+    }
+  }
+  render();
+  btn.addEventListener('click',()=>{
+    shown=Math.min(shown+batchSize,cards.length);
+    render();
+    const next=cards[Math.max(0,shown-batchSize)];
+    if(next && shown<cards.length+1){
+      next.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  const trigger=document.getElementById('contactTrigger');
+  const modal=document.getElementById('contactModal');
+  if(!trigger || !modal) return;
+  const closeEls=modal.querySelectorAll('[data-contact-close]');
+  const open=()=>{ modal.classList.add('is-open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; modal.querySelector('.contact-modal__close')?.focus(); };
+  const close=()=>{ modal.classList.remove('is-open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; trigger.focus(); };
+  trigger.addEventListener('click',open);
+  closeEls.forEach(el=>el.addEventListener('click',close));
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && modal.classList.contains('is-open')) close(); });
+})();
+</script>
+
+</body>
+</html>
