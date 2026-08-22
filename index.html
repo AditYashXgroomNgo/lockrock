@@ -541,6 +541,17 @@ h1,h2,h3,
 .brand-shot--full h2{
   font-size:clamp(3.8rem,8vw,8.5rem)!important;
 }
+/* add carousel */
+.product-gallery__video-slide{
+  background:#000;
+}
+
+.product-gallery__video{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
 
 .hero h1 em,
 .brand-shot--full h2 em,
@@ -1067,7 +1078,16 @@ footer.site-footer{background:#fff!important;color:#111!important;border-top:1px
             <div class="product-gallery__slide"><img src="assets/lockrock-pair-square.png" alt="LockRock collars pair"></div>
             <div class="product-gallery__slide"><img src="assets/lockrock-barbell-square.png" alt="LockRock collar secured on a loaded barbell"></div>
             <div class="product-gallery__slide"><img src="assets/standing-lift-full.png" alt="Athlete standing with a loaded barbell secured with LockRock"></div>
-            <div class="product-gallery__slide"><img src="assets/female-athlete.jpg" alt="Female athlete performing an overhead press with LockRock on the barbell"></div>
+            <div class="product-gallery__slide product-gallery__video-slide">
+              <video
+                class="product-gallery__video"
+                muted
+                playsinline
+                preload="metadata"
+                aria-label="LockRock product demonstration">
+                <source src="assets/female-athlete.mp4" type="video/mp4">
+              </video>
+            </div>
             <div class="product-gallery__slide"><img src="assets/lockrock-barbell-closeup-square.png" alt="LockRock collar secured against a weight plate on a barbell"></div>
           </div>
         </div>
@@ -1521,30 +1541,155 @@ footer.site-footer{background:#fff!important;color:#111!important;border-top:1px
 </script>
 
 <script>
+<script>
 (function(){
-  const track=document.getElementById('productTrack');
-  const viewport=document.getElementById('productGallery');
-  const dots=[...document.querySelectorAll('.product-gallery__dot')];
-  const prev=document.getElementById('galleryPrev');
-  const next=document.getElementById('galleryNext');
+  const track = document.getElementById('productTrack');
+  const viewport = document.getElementById('productGallery');
+  const dots = [...document.querySelectorAll('.product-gallery__dot')];
+  const prev = document.getElementById('galleryPrev');
+  const next = document.getElementById('galleryNext');
+
   if(!track || !viewport) return;
-  let index=0, startX=0, currentX=0, dragging=false;
-  const slideCount=track.querySelectorAll(".product-gallery__slide").length;
-  function goTo(i){
-    index=(i+slideCount)%slideCount;
-    track.style.transform=`translateX(-${index*100}%)`;
-    dots.forEach((d,n)=>d.classList.toggle('is-active',n===index));
+
+  let index = 0;
+  let startX = 0;
+  let currentX = 0;
+  let dragging = false;
+  let auto = null;
+
+  const slides = [...track.querySelectorAll('.product-gallery__slide')];
+  const slideCount = slides.length;
+
+  function stopAuto(){
+    if(auto){
+      clearTimeout(auto);
+      auto = null;
+    }
   }
-  prev?.addEventListener('click',()=>goTo(index-1));
-  next?.addEventListener('click',()=>goTo(index+1));
-  dots.forEach((d,n)=>d.addEventListener('click',()=>goTo(n)));
-  viewport.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;dragging=true;},{passive:true});
-  viewport.addEventListener('touchmove',e=>{if(dragging) currentX=e.touches[0].clientX;},{passive:true});
-  viewport.addEventListener('touchend',()=>{if(!dragging)return;const delta=currentX-startX;if(Math.abs(delta)>45)goTo(index+(delta<0?1:-1));startX=currentX=0;dragging=false;});
-  let auto=setInterval(()=>goTo(index+1),5000);
-  viewport.addEventListener('mouseenter',()=>clearInterval(auto));
-  viewport.addEventListener('mouseleave',()=>auto=setInterval(()=>goTo(index+1),5000));
+
+  function playCurrentVideo(){
+    const video = slides[index]?.querySelector('video');
+
+    if(!video) return false;
+
+    video.currentTime = 0;
+
+    video.play().catch(() => {});
+
+    video.onended = () => {
+      goTo(index + 1);
+    };
+
+    return true;
+  }
+
+  function scheduleNext(){
+    stopAuto();
+
+    // If this slide contains a video,
+    // let the video decide when to move on.
+    if(playCurrentVideo()){
+      return;
+    }
+
+    // Normal image slides stay for 5 seconds.
+    auto = setTimeout(() => {
+      goTo(index + 1);
+    }, 5000);
+  }
+
+  function pauseAllVideos(){
+    slides.forEach(slide => {
+      const video = slide.querySelector('video');
+
+      if(video){
+        video.pause();
+        video.onended = null;
+      }
+    });
+  }
+
+  function goTo(i){
+    stopAuto();
+    pauseAllVideos();
+
+    index = (i + slideCount) % slideCount;
+
+    track.style.transform = `translateX(-${index * 100}%)`;
+
+    dots.forEach((dot, n) => {
+      dot.classList.toggle('is-active', n === index);
+    });
+
+    scheduleNext();
+  }
+
+  prev?.addEventListener('click', () => {
+    goTo(index - 1);
+  });
+
+  next?.addEventListener('click', () => {
+    goTo(index + 1);
+  });
+
+  dots.forEach((dot, n) => {
+    dot.addEventListener('click', () => {
+      goTo(n);
+    });
+  });
+
+  viewport.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    currentX = startX;
+    dragging = true;
+  }, {passive:true});
+
+  viewport.addEventListener('touchmove', e => {
+    if(dragging){
+      currentX = e.touches[0].clientX;
+    }
+  }, {passive:true});
+
+  viewport.addEventListener('touchend', () => {
+    if(!dragging) return;
+
+    const delta = currentX - startX;
+
+    if(Math.abs(delta) > 45){
+      goTo(index + (delta < 0 ? 1 : -1));
+    }
+
+    startX = 0;
+    currentX = 0;
+    dragging = false;
+  });
+
+  // Desktop: pause the normal carousel timer while hovering.
+  viewport.addEventListener('mouseenter', () => {
+    stopAuto();
+
+    const video = slides[index]?.querySelector('video');
+    if(video){
+      video.pause();
+    }
+  });
+
+  viewport.addEventListener('mouseleave', () => {
+    const video = slides[index]?.querySelector('video');
+
+    if(video){
+      video.play().catch(() => {});
+      video.onended = () => goTo(index + 1);
+    }else{
+      scheduleNext();
+    }
+  });
+
+  // Start carousel
+  scheduleNext();
+
 })();
+</script>
 </script>
 
 <script>
