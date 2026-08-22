@@ -330,6 +330,62 @@
   .product-price{display:flex;align-items:flex-end;gap:13px;margin-bottom:25px;}
   .product-price__amount{font-family:Anton,Impact,sans-serif;font-size:52px;line-height:1;color:#fff;}
   .product-price__currency{font-family:"IBM Plex Mono",monospace;color:#8A8B90;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:7px;}
+  .product-price__old{
+    font-family:var(--ref-sans);
+    font-size:22px;
+    line-height:1;
+    color:#777!important;
+    text-decoration:line-through;
+    text-decoration-thickness:2px;
+  }
+
+  .sale-live{
+    display:inline-flex;
+    align-items:center;
+    padding:6px 10px;
+    border-radius:4px;
+    background:#E21B2D;
+    color:#fff!important;
+    font-family:var(--ref-sans);
+    font-size:11px;
+    line-height:1;
+    letter-spacing:.12em;
+    font-weight:700;
+    animation:saleLivePulse 2.2s ease-in-out infinite;
+  }
+
+  @keyframes saleLivePulse{
+    0%,100%{opacity:1;transform:scale(1);}
+    50%{opacity:.55;transform:scale(.97);}
+  }
+
+  .stock-warning{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin:-8px 0 24px;
+    color:#D91F3D!important;
+    font-family:var(--ref-sans);
+    font-size:12px;
+    line-height:1;
+    font-weight:600;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+  }
+
+  .stock-dot{
+    width:7px;
+    height:7px;
+    flex:none;
+    border-radius:50%;
+    background:#D91F3D;
+    animation:stockPulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes stockPulse{
+    0%,100%{opacity:1;}
+    50%{opacity:.35;}
+  }
   .product-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;}
   .product-meta span{border:1px solid #28282C;border-radius:999px;padding:9px 13px;color:#B9BABE;font-size:12px;font-family:"IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.08em;}
   .product-buy{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
@@ -340,7 +396,8 @@
   @media(max-width:900px){
     .product-showcase{padding:75px 0;}
     .product-showcase__grid{grid-template-columns:1fr;gap:38px;}
-    .product-info{order:-1;}
+    .product-gallery{order:1;}
+    .product-info{order:2;}
     .product-info h2{font-size:58px;}
   }
   @media(max-width:560px){
@@ -1030,8 +1087,13 @@ footer.site-footer{background:#fff!important;color:#111!important;border-top:1px
         <h2>NO SLIP.<br>NO WOBBLE.</h2>
         <p class="product-info__sub">Wrap it. Press it. Lock it. A simple hook-and-loop barbell collar designed to keep your plates where they belong through every rep.</p>
         <div class="product-price">
+          <span class="product-price__old">₹799</span>
           <span class="product-price__amount">₹485</span>
-          <span class="product-price__currency">Per Pair</span>
+          <span class="sale-live">SALE LIVE</span>
+        </div>
+        <div class="stock-warning">
+          <span class="stock-dot"></span>
+          LIMITED STOCKS LEFT
         </div>
         <div class="product-meta">
           <span>Red / Black</span>
