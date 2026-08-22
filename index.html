@@ -132,7 +132,7 @@
     align-items:flex-end;
     background-image:
       linear-gradient(180deg, rgba(10,10,11,0.32) 0%, rgba(10,10,11,0.48) 45%, rgba(10,10,11,0.97) 92%),
-      url('assets/hero-background.jpg');
+      url('https://lockrock.vercel.app/assets/hero-background.jpg');
     background-size:cover;
     background-position:center 20%;
     background-attachment:fixed;
@@ -173,8 +173,8 @@
     background-size:cover;
     background-position:center;
   }
-  .compare__panel--old{ background-image: linear-gradient(180deg, rgba(10,10,11,0.15) 10%, rgba(10,10,11,0.94) 88%), url('assets/struggle-old.jpg'); }
-  .compare__panel--new{ background-image: linear-gradient(180deg, rgba(10,10,11,0.1) 10%, rgba(20,4,5,0.92) 88%), url('assets/product-lockdown.jpg'); }
+  .compare__panel--old{ background-image: linear-gradient(180deg, rgba(10,10,11,0.15) 10%, rgba(10,10,11,0.94) 88%), url('https://lockrock.vercel.app/assets/struggle-old.jpg'); }
+  .compare__panel--new{ background-image: linear-gradient(180deg, rgba(10,10,11,0.1) 10%, rgba(20,4,5,0.92) 88%), url('https://lockrock.vercel.app/assets/product-lockdown.jpg'); }
   .compare__panel h3{ font-family:var(--font-display); text-transform:uppercase; font-weight:400; font-size:1.8rem; margin-bottom:18px; }
   .compare__panel--old h3{ color:#E63A2E; }
   .compare__panel--new h3{ color:#35C759; }
@@ -541,6 +541,19 @@ h1,h2,h3,
 .brand-shot--full h2{
   font-size:clamp(3.8rem,8vw,8.5rem)!important;
 }
+/* add carousel */
+.product-gallery__video-slide{
+  background:#000;
+}
+
+.product-gallery__video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  display:block;
+  background:#000;
+}
 
 .hero h1 em,
 .brand-shot--full h2 em,
@@ -903,8 +916,8 @@ header.nav .hamburger span{background:#fff!important;}
 .compare .section-head p{color:#555!important;}
 .compare__grid{gap:18px!important;overflow:visible!important;}
 .compare__panel{border:1px solid #ddd!important;border-radius:14px!important;min-height:560px!important;overflow:hidden!important;padding:clamp(26px,3.5vw,40px)!important;}
-.compare__panel--old{background-image:linear-gradient(180deg,rgba(255,255,255,0) 25%,rgba(255,255,255,.72) 54%,#fff 78%,#fff 100%),url('assets/struggle-old.jpg')!important;background-position:center top!important;}
-.compare__panel--new{background-image:linear-gradient(180deg,rgba(255,255,255,0) 25%,rgba(255,255,255,.72) 54%,#fff 78%,#fff 100%),url('assets/product-lockdown.jpg')!important;background-position:center top!important;}
+.compare__panel--old{background-image:linear-gradient(180deg,rgba(255,255,255,0) 25%,rgba(255,255,255,.72) 54%,#fff 78%,#fff 100%),url('https://lockrock.vercel.app/assets/struggle-old.jpg')!important;background-position:center top!important;}
+.compare__panel--new{background-image:linear-gradient(180deg,rgba(255,255,255,0) 25%,rgba(255,255,255,.72) 54%,#fff 78%,#fff 100%),url('https://lockrock.vercel.app/assets/product-lockdown.jpg')!important;background-position:center top!important;}
 .compare__panel h3,.compare__panel--old h3,.compare__panel--new h3{color:#111!important;}
 .compare__panel li,.compare__panel--old li,.compare__panel--new li{color:#111!important;border-top-color:#ddd!important;}
 .compare__panel--old li::before{color:#E63A2E!important;}
@@ -997,12 +1010,22 @@ footer.site-footer{background:#fff!important;color:#111!important;border-top:1px
   @media (max-width:600px){ .contact-modal__dialog{ padding:34px 26px; } }
 </style>
 
+
+  <!-- Performance: preload all hero carousel media so transitions are instant -->
+  <link rel="preconnect" href="https://lockrock.vercel.app" crossorigin>
+  <link rel="preload" as="video" href="assets/lockrock-demo.mp4" type="video/mp4">
+  <link rel="preload" as="video" href="assets/lockrock-demo-2.mp4" type="video/mp4">
+  <link rel="preload" as="image" href="https://lockrock.vercel.app/assets/lockrock-pair-square.png" fetchpriority="high">
+  <link rel="preload" as="image" href="https://lockrock.vercel.app/assets/lockrock-barbell-square.png" fetchpriority="high">
+  <link rel="preload" as="image" href="https://lockrock.vercel.app/assets/standing-lift-full.png" fetchpriority="high">
+  <link rel="preload" as="image" href="https://lockrock.vercel.app/assets/lockrock-barbell-closeup-square.png" fetchpriority="high">
+
 </head>
 <body>
 
 <header class="nav" id="siteNav">
   <div class="wrap nav__inner">
-    <a href="#top" class="nav__logo"><img src="assets/logo-badge.jpg" alt="LOCKROCK"></a>
+    <a href="#top" class="nav__logo"><img src="https://lockrock.vercel.app/assets/logo-badge.jpg" alt="LOCKROCK"></a>
     <nav class="nav__links">
       <a href="#compare">Why LockRock</a>
       <a href="#how">How It Works</a>
@@ -1064,21 +1087,29 @@ footer.site-footer{background:#fff!important;color:#111!important;border-top:1px
         <div class="product-showcase__label">LockRock · The Barbell Collar</div>
         <div class="product-gallery__viewport" id="productGallery">
           <div class="product-gallery__track" id="productTrack">
-            <div class="product-gallery__slide"><img src="assets/lockrock-pair-square.png" alt="LockRock collars pair"></div>
-            <div class="product-gallery__slide"><img src="assets/lockrock-barbell-square.png" alt="LockRock collar secured on a loaded barbell"></div>
-            <div class="product-gallery__slide"><img src="assets/standing-lift-full.png" alt="Athlete standing with a loaded barbell secured with LockRock"></div>
-            <div class="product-gallery__slide"><img src="assets/female-athlete.jpg" alt="Female athlete performing an overhead press with LockRock on the barbell"></div>
-            <div class="product-gallery__slide"><img src="assets/lockrock-barbell-closeup-square.png" alt="LockRock collar secured against a weight plate on a barbell"></div>
+            <div class="product-gallery__slide product-gallery__video-slide">
+              <video class="product-gallery__video" muted playsinline autoplay preload="auto" poster="assets/lockrock-demo-poster.jpg" aria-label="LockRock product demonstration">
+                <source src="assets/lockrock-demo.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="product-gallery__slide"><img src="https://lockrock.vercel.app/assets/lockrock-pair-square.png" alt="LockRock collars pair" width="1200" height="1200" loading="eager" decoding="async" fetchpriority="high"></div>
+            <div class="product-gallery__slide"><img src="https://lockrock.vercel.app/assets/lockrock-barbell-square.png" alt="LockRock collars" width="1200" height="1200" loading="eager" decoding="async" fetchpriority="high"></div>
+            <div class="product-gallery__slide"><img src="https://lockrock.vercel.app/assets/standing-lift-full.png" alt="Athlete standing with a loaded barbell secured with LockRock" width="1200" height="1200" loading="eager" decoding="async" fetchpriority="high"></div>
+            <div class="product-gallery__slide product-gallery__video-slide">
+              <video class="product-gallery__video" muted playsinline preload="auto" poster="assets/lockrock-demo-2-poster.jpg" aria-label="LockRock product demonstration">
+                <source src="assets/lockrock-demo-2.mp4" type="video/mp4">
+              </video>
+            </div>
           </div>
         </div>
         <button class="product-gallery__arrow product-gallery__arrow--prev" id="galleryPrev" aria-label="Previous product image">‹</button>
         <button type="button" class="product-gallery__arrow product-gallery__arrow--next" id="galleryNext" aria-label="Next product image">›</button>
         <div class="product-gallery__dots" id="galleryDots" aria-label="Choose product image">
-          <button class="product-gallery__dot is-active" aria-label="Image 1"></button>
+          <button class="product-gallery__dot is-active" aria-label="Video 1"></button>
           <button class="product-gallery__dot" aria-label="Image 2"></button>
           <button class="product-gallery__dot" aria-label="Image 3"></button>
           <button class="product-gallery__dot" aria-label="Image 4"></button>
-          <button class="product-gallery__dot" aria-label="Image 5"></button>
+          <button class="product-gallery__dot" aria-label="Video 2"></button>
         </div>
       </div>
 
@@ -1154,7 +1185,7 @@ footer.site-footer{background:#fff!important;color:#111!important;border-top:1px
       </div>
       <div class="steps">
         <div class="step-card reveal">
-          <div class="step-card__img" style="background-image:url('assets/wrap-step.jpg');">
+          <div class="step-card__img" style="background-image:url('https://lockrock.vercel.app/assets/wrap-step.jpg');">
             <span class="step__num">01</span>
           </div>
           <div class="step-card__body">
@@ -1163,7 +1194,7 @@ footer.site-footer{background:#fff!important;color:#111!important;border-top:1px
           </div>
         </div>
         <div class="step-card reveal">
-          <div class="step-card__img" style="background-image:url('assets/product-lockdown.jpg');">
+          <div class="step-card__img" style="background-image:url('https://lockrock.vercel.app/assets/product-lockdown.jpg');">
             <span class="step__num">02</span>
           </div>
           <div class="step-card__body">
@@ -1172,7 +1203,7 @@ footer.site-footer{background:#fff!important;color:#111!important;border-top:1px
           </div>
         </div>
         <div class="step-card reveal">
-          <div class="step-card__img" style="background-image:url('assets/female-athlete.jpg'); background-position:center 15%;">
+          <div class="step-card__img" style="background-image:url('https://lockrock.vercel.app/assets/female-athlete.jpg'); background-position:center 15%;">
             <span class="step__num">03</span>
           </div>
           <div class="step-card__body">
@@ -1187,7 +1218,7 @@ footer.site-footer{background:#fff!important;color:#111!important;border-top:1px
   <!-- BRAND STATEMENT -->
   <section class="brand-shot brand-shot--split reveal" aria-label="LockRock lifting statement">
     <div class="brand-shot__media">
-      <img src="assets/hero-main.jpg" alt="LockRock athlete lifting with a loaded barbell">
+      <img src="https://lockrock.vercel.app/assets/hero-main.jpg" alt="LockRock athlete lifting with a loaded barbell">
     </div>
     <div class="brand-shot__content">
       <span class="eyebrow">REAL LIFTERS · REAL LOAD</span>
@@ -1429,7 +1460,7 @@ footer.site-footer{background:#fff!important;color:#111!important;border-top:1px
 <footer class="site-footer">
   <div class="wrap footer__top">
     <div class="footer__brand">
-      <img src="assets/logo-badge.jpg" alt="LOCKROCK">
+      <img src="https://lockrock.vercel.app/assets/logo-badge.jpg" alt="LOCKROCK">
       <p>Hook-and-loop barbell collars engineered for a one-hand lock and a grip that outlasts the bar.</p>
 
     </div>
@@ -1522,30 +1553,109 @@ footer.site-footer{background:#fff!important;color:#111!important;border-top:1px
 
 <script>
 (function(){
-  const track=document.getElementById('productTrack');
-  const viewport=document.getElementById('productGallery');
-  const dots=[...document.querySelectorAll('.product-gallery__dot')];
-  const prev=document.getElementById('galleryPrev');
-  const next=document.getElementById('galleryNext');
+  const track = document.getElementById('productTrack');
+  const viewport = document.getElementById('productGallery');
+  const dots = [...document.querySelectorAll('.product-gallery__dot')];
+  const prev = document.getElementById('galleryPrev');
+  const next = document.getElementById('galleryNext');
   if(!track || !viewport) return;
-  let index=0, startX=0, currentX=0, dragging=false;
-  const slideCount=track.querySelectorAll(".product-gallery__slide").length;
-  function goTo(i){
-    index=(i+slideCount)%slideCount;
-    track.style.transform=`translateX(-${index*100}%)`;
-    dots.forEach((d,n)=>d.classList.toggle('is-active',n===index));
+
+  let index = 0;
+  let startX = 0, currentX = 0, dragging = false;
+  let auto = null;
+  let videoPlayCount = 0;
+  const slides = [...track.querySelectorAll('.product-gallery__slide')];
+  const slideCount = slides.length;
+  const images = slides.flatMap(slide => [...slide.querySelectorAll('img')]);
+  const videos = slides.flatMap(slide => [...slide.querySelectorAll('video')]);
+
+  // Warm all carousel media immediately so transitions feel instant.
+  images.forEach(img => {
+    img.loading = 'eager';
+    img.fetchPriority = 'high';
+    if (img.complete) img.decode?.().catch(()=>{});
+  });
+  videos.forEach(video => {
+    video.preload = 'auto';
+    video.muted = true;
+    video.playsInline = true;
+    video.load();
+  });
+
+  function stopAuto(){
+    if(auto){ clearTimeout(auto); auto = null; }
   }
-  prev?.addEventListener('click',()=>goTo(index-1));
-  next?.addEventListener('click',()=>goTo(index+1));
-  dots.forEach((d,n)=>d.addEventListener('click',()=>goTo(n)));
-  viewport.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;dragging=true;},{passive:true});
-  viewport.addEventListener('touchmove',e=>{if(dragging) currentX=e.touches[0].clientX;},{passive:true});
-  viewport.addEventListener('touchend',()=>{if(!dragging)return;const delta=currentX-startX;if(Math.abs(delta)>45)goTo(index+(delta<0?1:-1));startX=currentX=0;dragging=false;});
-  let auto=setInterval(()=>goTo(index+1),5000);
-  viewport.addEventListener('mouseenter',()=>clearInterval(auto));
-  viewport.addEventListener('mouseleave',()=>auto=setInterval(()=>goTo(index+1),5000));
+
+  function pauseAllVideos(){
+    videos.forEach(video => {
+      video.pause();
+      video.onended = null;
+    });
+  }
+
+  function playCurrentVideo(){
+    const video = slides[index]?.querySelector('video');
+    if(!video) return false;
+
+    videoPlayCount = 1;
+    video.currentTime = 0;
+    video.onended = () => {
+      if (videoPlayCount < 2) {
+        videoPlayCount += 1;
+        video.currentTime = 0;
+        video.play().catch(()=>{});
+      } else {
+        goTo(index + 1);
+      }
+    };
+
+    video.play().catch(()=>{});
+    return true;
+  }
+
+  function scheduleNext(){
+    stopAuto();
+    if(playCurrentVideo()) return;
+    auto = setTimeout(() => goTo(index + 1), 5000);
+  }
+
+  function goTo(i){
+    stopAuto();
+    pauseAllVideos();
+    index = (i + slideCount) % slideCount;
+    videoPlayCount = 0;
+    track.style.transform = `translate3d(-${index * 100}%,0,0)`;
+    dots.forEach((dot,n) => dot.classList.toggle('is-active', n === index));
+    scheduleNext();
+  }
+
+  prev?.addEventListener('click', () => goTo(index - 1));
+  next?.addEventListener('click', () => goTo(index + 1));
+  dots.forEach((dot,n) => dot.addEventListener('click', () => goTo(n)));
+
+  viewport.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    currentX = startX;
+    dragging = true;
+  }, {passive:true});
+
+  viewport.addEventListener('touchmove', e => {
+    if(dragging) currentX = e.touches[0].clientX;
+  }, {passive:true});
+
+  viewport.addEventListener('touchend', () => {
+    if(!dragging) return;
+    const delta = currentX - startX;
+    if(Math.abs(delta) > 45) goTo(index + (delta < 0 ? 1 : -1));
+    startX = currentX = 0;
+    dragging = false;
+  });
+
+  // Start the first video immediately.
+  scheduleNext();
 })();
 </script>
+
 
 <script>
 
